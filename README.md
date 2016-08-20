@@ -18,18 +18,20 @@ consoleoutput:?title=My app name&input=true&message=Hello World
 Once the app has been launched, open a connection to the app with the Windows.ApplicationModel.AppService.AppServiceConnection class.
     
 AppServiceName: "consoleoutput"
+
 PackageFamilyName: "49752MichaelS.Scherotter.ConsoleOutput_9eg5g21zq32qm"
 
 ## Logging Messages
 Once the connection has been opened, use AppServiceConnection.SendMessageAsync() to send messages
 
 "Message":      (string) the message to output
+
 "LoggingLevel": (string) the logging level which will translate to a color
-				Verbose:		Black
-				Error:			Red
-				Warning:		Orange
-				Critical:		Blue
-				Informational:	Green
+- Verbose:		Black
+- Error:			Red
+- Warning:		Orange
+- Critical:		Blue
+- Informational:	Green
 
 ## ConsoleOutput.ConsoleOutputLoggingChannel
 This is a class you can use in your app using the standard logging facility in in UWP apps to open a channel to Console output
