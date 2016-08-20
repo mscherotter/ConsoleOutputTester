@@ -28,6 +28,8 @@ Once the connection has been opened, use AppServiceConnection.SendMessageAsync()
 - Critical:		Blue
 - Informational:	Green
 
+Any other message paramters will be shown as "Key: Value"
+
 ## ConsoleOutput.ConsoleOutputLoggingChannel
 This is a class you can use in your app using the standard logging facility in in UWP apps to open a channel to Console output
 Full source code is [here](https://github.com/mscherotter/ConsoleOutputTester/blob/master/ConsoleOuptutTester/ConsoleOutput/ConsoleOutputLoggingChannel.cs).
