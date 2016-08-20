@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ConsoleOutput;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
 using Windows.System;
@@ -16,6 +17,7 @@ namespace ConsoleOuptutTester
     public sealed partial class MainPage : Page
     {
         private AppServiceConnection _appServiceConnection;
+        private ConsoleOutputLoggingChannel _channel;
 
         public MainPage()
         {
@@ -73,24 +75,36 @@ namespace ConsoleOuptutTester
 
         private async void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_appServiceConnection == null)
+            string messageText = string.Format("{0} x {1}", e.NewSize.Width, e.NewSize.Height);
+
+            if (_appServiceConnection != null)
             {
-                return;
+                var message = new ValueSet
+                {
+                    ["Message"] = string.Format("{0} x {1}", e.NewSize.Width, e.NewSize.Height)
+                };
+
+                await _appServiceConnection.SendMessageAsync(message);
             }
 
-            var message = new ValueSet
+            if (_channel != null && _channel.Enabled)
             {
-                ["Message"] = string.Format("{0} x {1}", e.NewSize.Width, e.NewSize.Height)
-            };
-
-            await _appServiceConnection.SendMessageAsync(message);
+                _channel.LogMessage(messageText);
+                _channel.LogValuePair("Width", System.Convert.ToInt32(e.NewSize.Width));
+                _channel.LogValuePair("Height", System.Convert.ToInt32(e.NewSize.Height));
+            }
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private async void StartLogging(object sender, RoutedEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             await InitializeAppServiceConnectionAsync();
+        }
+
+        private void StartLoggingWithChannel(object sender, RoutedEventArgs e)
+        {
+            _channel = new ConsoleOutput.ConsoleOutputLoggingChannel("Console Logging Tester Channel");
+
+
         }
     }
 }

@@ -7,11 +7,16 @@
     mc:Ignorable="d" SizeChanged="MainPage_OnSizeChanged">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         <RowDefinition/>
-    </Grid.RowDefinitions>
-        <TextBlock Text="Resize this window to send events to Console Output" TextWrapping="Wrap" Margin="4"/>
-        <TextBox x:Name="OutputBox" Header="Messages from Console Output" IsReadOnly="True" Grid.Row="1" Margin="4" AcceptsReturn="True"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Start Logging" Click="StartLogging" Margin="4"/>
+            <Button Content="Start Logging with ConsoleOutputLoggingChannel" Margin="4"  Click="StartLoggingWithChannel"/>
+        </StackPanel>
+        <TextBlock Text="Resize this window to send events to Console Output" TextWrapping="Wrap" Margin="4" Grid.Row="1"/>
+        <TextBox x:Name="OutputBox" Header="Messages from Console Output" IsReadOnly="True" Grid.Row="2" Margin="4" AcceptsReturn="True"/>
     </Grid>
 </Page>
