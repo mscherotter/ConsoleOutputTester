@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ConsoleOutput;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Diagnostics;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -90,8 +91,14 @@ namespace ConsoleOuptutTester
             if (_channel != null && _channel.Enabled)
             {
                 _channel.LogMessage(messageText);
-                _channel.LogValuePair("Width", System.Convert.ToInt32(e.NewSize.Width));
-                _channel.LogValuePair("Height", System.Convert.ToInt32(e.NewSize.Height));
+
+                LoggingLevel widthLevel = e.NewSize.Width < 640 ? LoggingLevel.Warning : LoggingLevel.Verbose;
+                LoggingLevel heightLevel = e.NewSize.Height < 480 ? LoggingLevel.Warning : LoggingLevel.Verbose;
+
+                // Log a warning if the size is less than 640x480
+                _channel.LogValuePair("Width", System.Convert.ToInt32(e.NewSize.Width), widthLevel);
+
+                _channel.LogValuePair("Height", System.Convert.ToInt32(e.NewSize.Height), heightLevel);
             }
         }
 

@@ -7,6 +7,17 @@ using Windows.System;
 
 namespace ConsoleOutput
 {
+    /// <summary>
+    /// Console Output Logging Channel
+    /// <remarks>
+    /// Logging Level Colors
+    /// Verbose:     Black
+    /// Error:       Red
+    /// Warning:     Orange
+    /// Critical:    Blue
+    /// Information: Green
+    /// </remarks>
+    /// </summary>
     public sealed class ConsoleOutputLoggingChannel : ILoggingChannel
     {
         private AppServiceConnection _appServiceConnection;
