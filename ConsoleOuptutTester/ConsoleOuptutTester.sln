@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleOutput", "ConsoleOut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F06D088-D179-4E33-B518-05133B5D7E84}"
 	ProjectSection(SolutionItems) = preProject
+		..\DesktopTesting.png = ..\DesktopTesting.png
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

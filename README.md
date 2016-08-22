@@ -70,3 +70,5 @@ To see an sample that uses the Windows Logging APIs, look [here](https://github.
 			_channel.LogValuePair("Logging Level", (int) level, level);
 		}
 	}
+
+![Demo of ConsoleOutputLoggingChannel](DesktopTesting.png "Demo of ConsoleOutputLoggingChannel")
