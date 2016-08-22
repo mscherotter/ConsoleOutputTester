@@ -107,11 +107,39 @@ namespace ConsoleOuptutTester
             await InitializeAppServiceConnectionAsync();
         }
 
+        /// <summary>
+        /// Create the console ouput logging channel and attach an event that will
+        /// trigger when the channel is enabled
+        /// </summary>
+        /// <param name="sender">the button</param>
+        /// <param name="e">the routed event arguments</param>
         private void StartLoggingWithChannel(object sender, RoutedEventArgs e)
         {
-            _channel = new ConsoleOutput.ConsoleOutputLoggingChannel("Console Logging Tester Channel");
+            _channel = new ConsoleOutput.ConsoleOutputLoggingChannel();
 
+            _channel.LoggingEnabled += _channel_LoggingEnabled;
+        }
 
+        /// <summary>
+        /// Test all of the logging channel methods
+        /// </summary>
+        /// <param name="sender">the Console Output logging channel</param>
+        /// <param name="args">the event argumetns</param>
+        private void _channel_LoggingEnabled(ILoggingChannel sender, object args)
+        {
+            _channel.LogMessage("event string");
+            _channel.LogValuePair("Ticks", DateTime.UtcNow.Ticks.GetHashCode());
+
+            foreach (var item in Enum.GetNames(typeof(LoggingLevel)))
+            {
+                var eventString = string.Format("{0} event string", item);
+
+                LoggingLevel level = (LoggingLevel)Enum.Parse(typeof(LoggingLevel), item);
+
+                _channel.LogMessage(eventString, level);
+
+                _channel.LogValuePair("Logging Level", (int) level, level);
+            }
         }
     }
 }
