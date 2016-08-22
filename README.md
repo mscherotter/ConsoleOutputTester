@@ -56,8 +56,8 @@ To see an sample that uses the Windows Logging APIs, look [here](https://github.
 	/// <param name="args">the event argumetns</param>
 	private void _channel_LoggingEnabled(ILoggingChannel sender, object args)
 	{
-		_channel.LogMessage("event string");
-		_channel.LogValuePair("Ticks", DateTime.UtcNow.Ticks.GetHashCode());
+		sender.LogMessage("event string");
+		sender.LogValuePair("Ticks", DateTime.UtcNow.Ticks.GetHashCode());
 
 		foreach (var item in Enum.GetNames(typeof(LoggingLevel)))
 		{
@@ -65,9 +65,9 @@ To see an sample that uses the Windows Logging APIs, look [here](https://github.
 
 			LoggingLevel level = (LoggingLevel)Enum.Parse(typeof(LoggingLevel), item);
 
-			_channel.LogMessage(eventString, level);
+			sender.LogMessage(eventString, level);
 
-			_channel.LogValuePair("Logging Level", (int) level, level);
+			sender.LogValuePair("Logging Level", (int) level, level);
 		}
 	}
 
